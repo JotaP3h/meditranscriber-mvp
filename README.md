@@ -1,7 +1,7 @@
 
 
 
-```markdown
+
 # 🩺🧠 MediTranscriber MVP – Transcrição Médica com IA (Whisper + Pyannote)
 
 MediTranscriber é um **MVP de GenAI** que transcreve consultas médicas a partir de áudios, usando:
