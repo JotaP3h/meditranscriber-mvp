@@ -1,7 +1,5 @@
 
----
 
-# **📄 README.md (COMPLETO — COPIE EXATAMENTE COMO ESTÁ)**
 
 ```markdown
 # 🩺🧠 MediTranscriber MVP – Transcrição Médica com IA (Whisper + Pyannote)
