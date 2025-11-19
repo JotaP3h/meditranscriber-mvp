@@ -209,4 +209,4 @@ index.html
 **João Pedro Freitas (JotaP3h)**
 
 * GitHub: [https://github.com/JotaP3h](https://github.com/JotaP3h)
-* LinkedIn: *(adicione quando quiser)*
+* LinkedIn: linkedin.com/in/joao-freitas-e-silva
