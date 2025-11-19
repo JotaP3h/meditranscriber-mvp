@@ -1,125 +1,158 @@
-🩺 MediTranscriber — MVP de Transcrição Médica com IA (Whisper + Pyannote)
 
-O MediTranscriber é um MVP de GenAI que transcreve consultas médicas a partir de áudios, separa falas entre médico e paciente, e retorna um JSON estruturado — pronto para análise, prontuário ou automação.
+---
 
-Ele usa:
+# **📄 README.md (COMPLETO — COPIE EXATAMENTE COMO ESTÁ)**
 
-🚀 Faster-Whisper — Transcrição automática otimizada
+```markdown
+# 🩺🧠 MediTranscriber MVP – Transcrição Médica com IA (Whisper + Pyannote)
 
-🎙 Pyannote-audio — Diarização (quem falou o quê)
+MediTranscriber é um **MVP de GenAI** que transcreve consultas médicas a partir de áudios, usando:
 
-⚡ FastAPI — API moderna com Swagger
+- **Faster-Whisper** para transcrição automática (ASR)  
+- **Pyannote-audio** para diarização (separação de falantes)  
+- **FastAPI** como backend para expor tudo via API  
 
-🧠 Classificação automática médico × paciente
+O objetivo do projeto é demonstrar, na prática, o uso de **IA aplicada**, processamento de áudio e construção de APIs modernas — focado em cenários de saúde (HealthTech).
 
-Criado como projeto de portfólio para demonstrar experiência prática em IA aplicada, processamento de áudio, Python e APIs modernas.
+---
 
-🔥 Funcionalidades principais
+## ✨ Principais funcionalidades
 
-Upload de áudio de consulta (.mp3, .wav, .m4a, etc.)
+- 🎤 Upload de áudio de consulta (`.mp3`, `.wav`, etc.)
+- 🧠 **Transcrição automática** do áudio em texto
+- 👥 **Diarização**: separa diferentes falantes
+- 🩺 Mapeamento de papéis (**médico** / **paciente**) via heurísticas
+- 📦 Retorno estruturado em **JSON**, pronto para prontuário ou análise
+- 📄 Documentação auto-gerada via **Swagger** (`/docs`)
+- 🌐 Front-end simples (HTML/JS) para testes locais
 
-Transcrição automática do áudio
+---
 
-Diarização com identificação de falantes
+## 🧰 Stack Tecnológica
 
-Classificação automática dos papéis
+- **Linguagem:** Python 3.10  
+- **Framework Web:** FastAPI + Uvicorn  
+- **Transcrição (ASR):** Faster-Whisper  
+- **Diarização:** pyannote.audio  
+- **Execução com GPU:** CUDA (quando disponível)  
+- **Front-end:** HTML + CSS + JavaScript simples  
 
-Retorno estruturado em JSON
+---
 
-Documentação via Swagger
+## 📁 Estrutura do projeto
 
-Front-end simples HTML/JS
+```
 
-Suporte a GPU (CUDA) e CPU
-
-🧰 Stack Tecnológica
-
-Python 3.10
-
-FastAPI + Uvicorn
-
-Faster-Whisper
-
-Pyannote-audio
-
-Torch / Torchaudio
-
-HTML + CSS + JavaScript (Front-end simples)
-
-🗂 Estrutura do Projeto
-meditranscriber-mvp/
+Projeto_Medico_IA/
 │
-├── README.md
+└── meditranscriber_mvp/
+├── app_mvp.py              # App FastAPI principal
+├── app.py                  # Versão alternativa / testes
+├── diarize_transcribe.py   # Lógica de diarização + transcrição
+├── role_classifier.py      # Heurísticas para identificar médico/paciente
+├── report.py               # Saída estruturada / exportações
+├── uploads/                # Áudios enviados
+├── web/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
 ├── requirements.txt
-│
-├── meditranscriber_mvp/
-│   ├── app_mvp.py
-│   ├── app.py
-│   ├── diarize_transcribe.py
-│   ├── role_classifier.py
-│   ├── report.py
-│   ├── teste.py
-│   ├── run.ps1
-│   ├── uploads/
-│   │   └── .gitkeep
-│   └── web/
-│       ├── index.html
-│       ├── styles.css
-│       └── app.js
+└── .gitignore
 
-🚀 Como rodar localmente
-1. Clonar o repositório
+````
+
+---
+
+## 🚀 Como rodar localmente
+
+### 1. Clonar o repositório
+
+```bash
 git clone https://github.com/JotaP3h/meditranscriber-mvp.git
 cd meditranscriber-mvp
+````
 
-2. Criar e ativar ambiente virtual (opcional)
+---
 
-Windows:
+### 2. Criar e ativar o ambiente virtual
 
+**Windows (PowerShell):**
+
+```bash
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
 
+**Linux/Mac:**
 
-Linux/Mac:
-
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
-3. Instalar dependências
+---
+
+### 3. Instalar dependências
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Rodar API FastAPI
+⚠️ *Whisper + Pyannote são pesados. Em PCs sem GPU funciona, mas mais devagar.*
+
+---
+
+### 4. Rodar o servidor FastAPI
+
+```bash
 uvicorn meditranscriber_mvp.app_mvp:app --reload
+```
 
+Saída esperada:
 
-Acesse:
+```
+Uvicorn running on http://127.0.0.1:8000
+Application startup complete.
+```
 
-Swagger: http://127.0.0.1:8000/docs
+---
 
-Redoc: http://127.0.0.1:8000/redoc
+### 5. Acessar documentação da API
 
-🔌 Endpoints principais
-GET /
+* Swagger UI → [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+* Redoc → [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+---
+
+## 🔌 Endpoints principais
+
+### **GET /**
+
+```json
 {
   "ok": true,
   "app": "MediTranscriber MVP",
   "device": "cuda",
   "diarization_available": true
 }
+```
 
-POST /transcribe-diarize
+---
+
+### **POST /transcribe-diarize**
 
 Multipart/form-data:
 
-file → áudio
+* `file` → áudio
+* `language` (opcional)
+* `vad_filter` (opcional)
 
-language → "pt"
+Exemplo de resposta:
 
-vad_filter → true/false
-
-Retorno (exemplo):
-
+```json
 {
+  "device": "cuda",
+  "language": "pt",
   "roles_map": {
     "SPEAKER_00": "medico",
     "SPEAKER_01": "paciente"
@@ -133,47 +166,49 @@ Retorno (exemplo):
     }
   ]
 }
+```
 
-🎧 Front-end simples (web)
+---
 
-Dentro de:
+## 🌐 Front-end simples
 
+Pasta:
+
+```
 meditranscriber_mvp/web/
+```
 
+Abra:
 
-Basta abrir index.html no navegador.
+```
+index.html
+```
 
-⚠️ Limitações do MVP
+---
 
-Classificação de papéis ainda é heurística simples
+## ⚠️ Limitações do MVP
 
-Pyannote é pesado e o primeiro load leva tempo
+* Classificação médico/paciente ainda é por heurística
+* Pyannote pode errar falantes dependendo do áudio
+* Sem GPU, processamento mais lento
+* MVP não é validado para uso clínico real
 
-Sem GPU pode ser lento para áudios longos
+---
 
-MVP não destinado ao uso clínico real
+## 🧭 Próximos passos
 
-🧭 Próximos Passos
+* Melhorar heurísticas
+* Exportação em **PDF / DOCX**
+* Criar painel web com histórico
+* Autenticação (JWT)
+* Banco de dados (PostgreSQL)
+* Docker + deploy
 
-Melhorar modelo de classificação de papéis
+---
 
-Exportar para PDF / DOCX
+## 👨‍💻 Autor
 
-Criar dashboard para histórico de transcrições
+**João Pedro Freitas (JotaP3h)**
 
-Adicionar autenticação JWT
-
-Integração com banco de dados
-
-Criar demo no HuggingFace Spaces
-
-Containerizar com Docker
-
-👨‍💻 Autor
-
-João Pedro Freitas (JotaP3h)
-Estudante de Sistemas de Informação, ex-empreendedor e entusiasta de IA aplicada a saúde, automação e produtividade.
-
-🔗 GitHub: https://github.com/JotaP3h
-
-🔗 LinkedIn: https://www.linkedin.com/in/joao-freitas-e-silva/
+* GitHub: [https://github.com/JotaP3h](https://github.com/JotaP3h)
+* LinkedIn: *(adicione quando quiser)*
