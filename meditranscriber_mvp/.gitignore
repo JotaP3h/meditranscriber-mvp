@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# virtual env
+.venv/
+env/
+venv/
+
+# audio uploads
+uploads/*
+!uploads/.gitkeep
+
+# models pesados
+models/
+model/
+pretrained/
+*.bin
+*.pt
+
+# sistema
+.DS_Store
+
+# configs sensíveis
+.env

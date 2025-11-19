@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>MediTranscriber MVP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>MediTranscriber — MVP</h1>
+
+    <section class="card">
+      <div class="controls">
+        <button id="btnRec">● Gravar</button>
+        <button id="btnStop" disabled>■ Parar</button>
+        <button id="btnSend" disabled>↑ Enviar</button>
+      </div>
+      <audio id="player" controls></audio>
+      <p id="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Resultado</h2>
+      <pre id="output"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
